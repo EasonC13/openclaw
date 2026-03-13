@@ -1,0 +1,11 @@
+import "./github-copilot-token-Ddz7Qicy.js";
+import { ki as ensureAuthProfileStore } from "./discord-BILexMOf.js";
+import "./accounts-dcuY07_X.js";
+import "./token-Diy_DXW4.js";
+import "./query-expansion-BGMOt54G.js";
+import "./utils-DypNjFCT.js";
+import "./paths-HD5MsNQn.js";
+import "./logger-Cgqh_G7v.js";
+import "./fetch-DJG_TLE7.js";
+import "./secret-file-CAD9-yp9.js";
+export { ensureAuthProfileStore };
