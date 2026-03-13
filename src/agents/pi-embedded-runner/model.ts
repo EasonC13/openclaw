@@ -11,6 +11,19 @@ import { findNormalizedProviderValue, normalizeProviderId } from "../model-selec
 import { discoverAuthStorage, discoverModels } from "../pi-model-discovery.js";
 import { normalizeResolvedProviderModel } from "./model.provider-normalization.js";
 
+/** Maps well-known providers to their native API type so the generic fallback
+ *  doesn't route every unknown model through openai-responses. */
+const PROVIDER_DEFAULT_API: Partial<Record<string, Api>> = {
+  anthropic: "anthropic-messages",
+  "amazon-bedrock": "bedrock-converse-stream",
+  google: "google-generative-ai",
+  ollama: "ollama",
+};
+
+function inferApiForProvider(provider: string): Api {
+  return PROVIDER_DEFAULT_API[normalizeProviderId(provider)] ?? "openai-responses";
+}
+
 type InlineModelEntry = ModelDefinitionConfig & {
   provider: string;
   baseUrl?: string;
@@ -231,7 +244,7 @@ export function resolveModelWithRegistry(params: {
       model: {
         id: modelId,
         name: modelId,
-        api: providerConfig?.api ?? "openai-responses",
+        api: providerConfig?.api ?? inferApiForProvider(provider),
         provider,
         baseUrl: providerConfig?.baseUrl,
         reasoning: configuredModel?.reasoning ?? false,
