@@ -1,3 +1,23 @@
+# Install from patched branch (setup-token fix)
+
+This fork includes a fix for [#19938](https://github.com/openclaw/openclaw/issues/19938) — Anthropic setup-token auth broken after 2026.2.17 (requests routed to wrong API endpoint).
+
+**Runtime: Node >= 22**
+
+```bash
+git clone --branch release-3.12-patched --depth 1 https://github.com/EasonC13/openclaw.git /tmp/openclaw-patched
+cd /tmp/openclaw-patched && npm install --omit=dev --ignore-scripts
+sudo npm install -g .
+```
+
+After the upstream fix is merged and published, switch back to the official release:
+
+```bash
+sudo npm install -g openclaw@latest
+```
+
+---
+
 # 🦞 OpenClaw — Personal AI Assistant
 
 <p align="center">
